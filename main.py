@@ -6,14 +6,22 @@ warnings.filterwarnings("ignore")
 # import libraries
 import requests, os
 import argparse
-import PIL
 from PIL import Image
 
 
 import gradio as gr
 from together import Together
+
+import os
+os.environ["TOGETHER_API_KEY"] = "aed5aac5ba06102156d61e72239addede92a31924fe7f73195c5a34929d3ad30"
+
+from together import Together
+client = Together()
+
+
 import textwrap
 
+import random
 
 ## FUNCTION 1: This Allows Us to Prompt the AI MODEL
 # -------------------------------------------------
@@ -53,7 +61,8 @@ def gen_image(prompt, width=256, height=256):
         n=1,
     )
     image_url = response.data[0].url
-    image_filename = "image.png"
+    # assign a random number to the image filename
+    image_filename = f"image-{random.randint(1, 1000000)}.png"
 
     # Download the image using requests instead of wget
     response = requests.get(image_url)
@@ -104,12 +113,12 @@ def bot_response_function(user_message, chat_history):
 if __name__ == "__main__":
     # args on which to run the script
     parser = argparse.ArgumentParser()
-    parser.add_argument("-o", "--option", type=int, default=1)
+    parser.add_argument("-o", "--option", type=int, default=3)
     parser.add_argument("-k", "--api_key", type=str, default=None)
     args = parser.parse_args()
-
+    api_key ="aed5aac5ba06102156d61e72239addede92a31924fe7f73195c5a34929d3ad30"
     # Get Client for your LLMs
-    client = Together(api_key=args.api_key)
+    client = Together(api_key=api_key)
 
     # run the script
     if args.option == 1:
@@ -125,7 +134,7 @@ if __name__ == "__main__":
 
     elif args.option == 2:
         ### Task 2: YOUR CODE HERE - Write a prompt for the LLM to generate an image
-        prompt = "Create an image of a cat"
+        prompt = "Create an image of a girl holding a cat"
 
         print(f"\nCreating Image for your prompt: {prompt} ")
         img = gen_image(prompt=prompt, width=256, height=256)
@@ -177,4 +186,4 @@ if __name__ == "__main__":
 
         app.launch()
     else:
-        print("Invalid option")
+        print("Invalid option") 
