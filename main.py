@@ -117,7 +117,7 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--option", type=int, default=3)
     parser.add_argument("-k", "--api_key", type=str, default=None)
     args = parser.parse_args()
-    api_key ="aed5aac5ba06102156d61e72239addede92a31924fe7f73195c5a34929d3ad30"
+    api_key ="api_key"
     # Get Client for your LLMs
     client = Together(api_key=api_key)
 
