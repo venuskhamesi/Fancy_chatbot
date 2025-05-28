@@ -13,7 +13,8 @@ import gradio as gr
 from together import Together
 
 import os
-os.environ["TOGETHER_API_KEY"] = "aed5aac5ba06102156d61e72239addede92a31924fe7f73195c5a34929d3ad30"
+os.environ["TOGETHER_API_KEY"] = "API_KEY"
+ api_key="API_KEY"
 
 from together import Together
 client = Together()
